@@ -1,0 +1,322 @@
+﻿@using MySaleApp.Admin.UI.Model
+@model MySaleApp.Admin.UI.ViewModel.PagedResultViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between mb-3">
+            <h2>Customers</h2>
+            <div class="d-flex justify-content-between mb-3 gap-2">
+                <form method="post" asp-controller="Customer" asp-action="Export">
+                    <input type="submit" class="btn btn-primary" value="Export" />
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <form asp-action="Index" method="get">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label for="Search">Search By</label>
+                    </div>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-2">From</div>
+                    <div class="col-sm-2">To</div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div class="row justify-content-end">
+                    <div class="col-sm-2 text-end">
+                        <select name="searchType" class="form-select">
+                            <option value="">--Select--</option>
+                            <option value="CustomerName">Customer Name</option>
+                            <option value="CustomerGuid">Customer Id</option>
+                            <option value="DbName">Database Name</option>
+
+                            <option value="MobileNo">Mobile Number</option>
+                            <option value="MobileVerificationOtp">Mobile Verification Otp</option>
+                            <option value="isMobileVerified">Is Mobile Verified</option>
+
+                            <option value="Email">Email</option>
+                            <option value="EmailVerificationOtp">Email Verification Otp</option>
+                            <option value="isEmailVerified">Is Email Verified</option>
+
+                            <option value="CountryCode">Country Code</option>
+                            <option value="CountryDialCode">Country Dial Code</option>
+
+                            <option value="isActive">Is Active</option>
+                            <option value="isBlocked">Is Blocked</option>
+                            <option value="isDeleted">Is Deleted</option>
+
+                            <option value="referralCode">Referral Code</option>
+                            <option value="referredBy">Referred By</option>
+
+                            <option value="CreatedDate">Created Date</option>
+                            <option value="CreatedBy">Created By</option>
+                            <option value="ModifiedDate">Modified Date</option>
+                            <option value="ModifiedBy">Modified By</option>
+
+                            <option value="isDbCreated">Is Db Created</option>
+                            <option value="isDbProcessCompleted">Is Db Process Completed</option>
+                            <option value="ExpiryDate">Expiry Date</option>
+                            <option value="PlanId">PlanId</option>
+
+                        </select>
+                    </div>
+                    <div class="col-sm-2 text-end">
+                        <input type="text" name="searchQuery" class="form-control" placeholder="Search Text" autocomplete="off" id="Search">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="date" name="fromDate" id="fromDate" class="form-control">
+                    </div>
+
+                    <div class="col-sm-2 text-end">
+                        <input type="date" name="toDate" id="toDate" class="form-control">
+                    </div>
+
+                    <div class="col-sm-2 text-end">
+                        <input type="number" name="searchDays" class="form-control" placeholder="Expiry Within Days" autocomplete="off">
+                    </div>
+                    <div class="col-sm-2 text-end">
+                        <div class="input-group mb-3">
+                            <button class="btn btn-secondary" type="submit"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-secondary" id="refreshButton" style="margin-left: 15px;"><i class="bi bi-arrow-clockwise"></i></button>
+                            
+                        </div>
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive">
+            <form id="csrfTokenForm">
+                @Html.AntiForgeryToken()
+            </form>
+            <table class="table table-hover rounded-3 overflow-hidden">
+                <thead class="table-primary">
+                    <tr>
+                        <th><input type="checkbox" /></th>
+                        <th>Customer<br>Name</th>
+                        <th>Country<br>Code</th>
+                        <th>Mobile<br>Number</th>
+                        <th>Email<br>Address</th>
+                        <th>Status</th>
+                        <th>Plan<br>Name</th>
+                        <th>Licenses</th>
+                        <th>Expiry<br>Date</th>
+                        <th>Referred<br>By</th>
+                        <th>Created<br>Date</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+                
+                <tbody>
+                    @foreach (var item in Model.Customers)
+                    {
+                        <tr>
+                            <td><input type="checkbox" /></td>
+                            <td>@item.CustomerName</td>
+                            <td>@item.CountryCode</td>
+                            <td>@item.MobileNo</td>
+                            <td>@item.Email</td>
+                            <td>@(item.IsActive ? "Active" : "Inacative")</td>
+                            <td>@item.PlanName</td>
+                            <td>@item.Licenses</td>
+                            <td>@item.PlanExpiryDate?.ToShortDateString()</td>
+                            <td>@item.ReferredBy</td>
+                            <td>@item.CreatedDate.ToShortDateString()</td>
+                            <td>
+                                <select class="form-select form-select-sm" onchange="handleActionChange(this, '@item.CustomerGuid')">
+                                    <option selected disabled>--Select--</option>
+                                    <option value="view">View Users</option>
+                                    <option value="extend">Extend Plan by 7 days</option>
+
+                                </select>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+            <div class="d-flex justify-content-between align-items-center p-3">
+                <!-- Pagination -->
+                @if (Model.TotalPages > 1)
+                {
+                    <nav>
+                        <ul class="pagination pagination-sm mb-0">
+                            <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
+                                <a class="page-link" asp-action="Index"
+                                   asp-route-pg="@(Model.PageIndex - 1)"
+                                   asp-route-pageSize="@ViewData["PageSize"]">Prev</a>
+                            </li>
+
+                            @if (Model.TotalPages > 7)
+                            {
+                                <li class="page-item @(Model.PageIndex == 1 ? "active" : "")">
+                                    <a class="page-link" asp-action="Index" asp-route-pg="1" asp-route-pageSize="@ViewData["PageSize"]">1</a>
+                                </li>
+
+                                @if (Model.PageIndex > 4)
+                                {
+                                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                                }
+
+                                @for (int i = Model.PageIndex - 2; i <= Model.PageIndex + 2; i++)
+                                {
+                                    if (i > 1 && i < Model.TotalPages)
+                                    {
+                                        <li class="page-item @(Model.PageIndex == i ? "active" : "")">
+                                            <a class="page-link" asp-action="Index" asp-route-pg="@i" asp-route-pageSize="@ViewData["PageSize"]">@i</a>
+                                        </li>
+                                    }
+                                }
+
+                                @if (Model.PageIndex < Model.TotalPages - 3)
+                                {
+                                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                                }
+
+                                <li class="page-item @(Model.PageIndex == Model.TotalPages ? "active" : "")">
+                                    <a class="page-link" asp-action="Index" asp-route-pg="@Model.TotalPages" asp-route-pageSize="@ViewData["PageSize"]">@Model.TotalPages</a>
+                                </li>
+                            }
+                            else
+                            {
+                                @for (int i = 1; i <= Model.TotalPages; i++)
+                                {
+                                    <li class="page-item @(Model.PageIndex == i ? "active" : "")">
+                                        <a class="page-link" asp-action="Index"
+                                           asp-route-pg="@i"
+                                           asp-route-pageSize="@ViewData["PageSize"]">@i</a>
+                                    </li>
+                                }
+                            }
+
+                            <li class="page-item @(Model.PageIndex == Model.TotalPages ? "disabled" : "")">
+                                <a class="page-link" asp-action="Index"
+                                   asp-route-pg="@(Model.PageIndex + 1)"
+                                   asp-route-pageSize="@ViewData["PageSize"]">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                }
+
+                <!-- Page size -->
+                <div class="d-flex align-items-center">
+                    <form method="get" asp-action="Index" class="d-flex align-items-center">
+                        <label for="pageSize" class="me-2">Page Size:</label>
+                        <select id="pageSize" name="pageSize" 
+                                class="form-select form-select-sm" 
+                                onchange="this.form.submit()" 
+                                asp-items="@(ViewData["PageSizes"] as SelectList)">
+                        </select>
+                        <input type="hidden" name="pg" value="@Model.PageIndex" />
+                    </form>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmExtendModal" tabindex="-1" aria-labelledby="confirmExtendModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Extension</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to extend the plan by 7 days for this customer?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmExtendBtn">Yes, Extend</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Confirmation Modal Ends -->
+
+
+</div>
+
+<!--Toast notification-->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+    <div id="toastSuccess" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                Expiry extended by 7 days!!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    let selectedCustomerId = null;
+
+    function handleActionChange(selectElem, id) {
+        const action = selectElem.value;
+
+        if (action === 'view') {
+            window.location.href = `/Customer/Users?customerGuid=${id}`;
+            return;
+        }
+
+        if (action === 'extend') {
+            selectedCustomerId = id; // Save selected customer
+            // Reset dropdown selection
+            selectElem.selectedIndex = 0;
+            // Show confirmation modal
+            const modal = new bootstrap.Modal(document.getElementById('confirmExtendModal'));
+            modal.show();
+        }
+    }
+
+    document.getElementById('confirmExtendBtn').addEventListener('click', function () {
+        if (!selectedCustomerId) return;
+
+        const token = document.querySelector('#csrfTokenForm input[name="__RequestVerificationToken"]').value;
+
+        const formData = new FormData();
+        formData.append("__RequestVerificationToken", token);
+        formData.append("customerGuid", selectedCustomerId);
+
+        fetch('/Customer/ExtendExpiry', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                // Show toast notification
+                const toast = new bootstrap.Toast(document.getElementById('toastSuccess'));
+                toast.show();
+                // Optionally reload the page
+                setTimeout(() => window.location.reload(), 1500);
+            } else {
+                alert("Something went wrong. Please try again.");
+            }
+        });
+
+        // Close modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('confirmExtendModal'));
+        modal.hide();
+    });
+</script>
+

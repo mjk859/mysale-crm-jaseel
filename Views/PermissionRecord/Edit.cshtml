@@ -1,0 +1,98 @@
+﻿@model MySaleApp.Admin.UI.Models.PermissionRecord
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Content-->
+<div class="page-content-tab">
+
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="float-end">
+                        <ol class="breadcrumb">
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Edit Permission Record</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+
+                    @*<div class="card-header">
+                    </div>*@
+
+                    <div class="card-body">
+                        <form class="my-4 needs-validation" asp-action="Edit" asp-controller="PermissionRecord" method="post" novalidate>
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <div class="mb-2 row">
+                                        <label asp-for="PermissionName" class="col-sm-3 col-control-label text-end">Permission Name</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" asp-for="PermissionName" class="form-control" autocomplete="off" placeholder="Enter Permission Name" required />
+                                            <div class="invalid-feedback">
+                                                Please Enter Permission Name
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 row">
+                                        <label asp-for="SystemName" class="col-sm-3 col-control-label text-end">System Name</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" asp-for="SystemName" class="form-control" autocomplete="off" placeholder="Enter System Name" required />
+                                            <div class="invalid-feedback">
+                                                Please Enter System Name
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 row">
+                                        <label asp-for="Category" class="col-sm-3 col-control-label text-end">Category</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" asp-for="Category" class="form-control" autocomplete="off" placeholder="Enter Category" required />
+                                            <div class="invalid-feedback">
+                                                Please Enter Category
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 row">
+                                        <label class="col-sm-3 col-control-label text-end"></label>
+                                        <div class="col-sm-9">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="Status" checked>
+                                                <label class="form-check-label" for="Status">Status</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                    </div>
+
+                                    <!-- Save and Back Buttons Row -->
+                                    <div class="mb-4 row">
+                                        <div class="col-lg-12 text-center">
+                                            <button class="btn btn-de-primary btn-fixed-width" type="submit">Update</button>
+                                            <a class="btn btn-de-danger btn-fixed-width" asp-action="Index">Back</a>
+                                        </div>
+                                    </div><!-- End Save and Back Buttons Row -->
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

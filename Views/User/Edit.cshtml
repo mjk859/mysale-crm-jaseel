@@ -1,0 +1,210 @@
+﻿@model MySaleApp.Admin.UI.Models.User
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Content-->
+<div class="page-content-tab">
+
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="float-end">
+                        <ol class="breadcrumb">
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Edit User</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <form class="my-4 needs-validation" asp-action="Edit" asp-controller="User" method="post" novalidate>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <input type="hidden" asp-for="Id" />
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="ParentCustomerId" class="col-sm-4 col-control-label text-end">Customer Name</label>
+                                        <div class="col-sm-8">
+                                            <select asp-for="ParentCustomerId" class="form-control" id="customerDropdown" required>
+                                                <option value="">Select Customer Name</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="UserName" class="col-sm-4 col-control-label text-end">User Name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" asp-for="UserName" class="form-control" autocomplete="off" placeholder="Enter User Name" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="CountryDialCode" class="col-sm-4 col-control-label text-end">Country Dial Code</label>
+                                        <div class="col-sm-8">
+                                            <input asp-for="CountryDialCode" class="form-control" autocomplete="off" placeholder="Enter Country Dial Code" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="MobileNo" class="col-sm-4 col-control-label text-end">Mobile Number</label>
+                                        <div class="col-sm-8">
+                                            <input asp-for="MobileNo" class="form-control" autocomplete="off" placeholder="Enter Mobile Number" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsMobileVerified">
+                                                <label class="form-check-label" for="isMobileVerified">Is Mobile Verified</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="Email" class="col-sm-4 col-control-label text-end">Email Address</label>
+                                        <div class="col-sm-8">
+                                            <input asp-for="Email" class="form-control" autocomplete="off" placeholder="Enter Email Address" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsEmailVerified">
+                                                <label class="form-check-label" for="isEmailVerified">Is Email Verified</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-6">
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsPasswordCreated">
+                                                <label class="form-check-label" for="isPasswordCreated">Is Password Created</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsActive" checked>
+                                                <label class="form-check-label" for="isActive">Is Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsBlocked">
+                                                <label class="form-check-label" for="isBlocked">Is Blocked</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsDeleted">
+                                                <label class="form-check-label" for="isDeleted">Is Deleted</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsSystemAccount">
+                                                <label class="form-check-label" for="IsSystemAccount">Is System Account</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label for="LastActivityDateUtc" class="col-sm-4 col-control-label text-end">Last Activity Date</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="date" asp-for="LastActivityDateUtc">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="LastIpAddress" class="col-sm-4 col-control-label text-end">Last IP Address</label>
+                                        <div class="col-sm-8">
+                                            <input asp-for="LastIpAddress" class="form-control" autocomplete="off" placeholder="Enter Last IP Address" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end" asp-for="LastLoginDateUtc">Last Login Date</label>
+                                        <div class="col-sm-8">
+                                            <input type="date" class="form-control" asp-for="LastLoginDateUtc">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Save and Back Buttons Row -->
+                            <div class="mb-3 row">
+                                <div class="col-lg-12 text-center">
+                                    <button class="btn btn-de-primary btn-fixed-width" type="submit">Update</button>
+                                    <a class="btn btn-de-danger btn-fixed-width" asp-action="Index">Back</a>
+                                </div>
+                            </div><!-- End Save and Back Buttons Row -->
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/code.jquery.com_jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '@Url.Action("GetCustomers", "Customer")',
+            method: 'GET',
+            success: function (data) {
+                var customerDropdown = $('#customerDropdown');
+                $.each(data, function (index, customer) {
+                    var option = $('<option>').text(customer.customerName).attr('value', customer.customerGuid);
+                    if (customer.customerGuid == '@Model.ParentCustomerId') {
+                        option.attr('selected', 'selected');
+                    }
+                    customerDropdown.append(option);
+                });
+            }
+        });
+    });
+</script>

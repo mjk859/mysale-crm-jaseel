@@ -1,0 +1,25 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/mysalecrm/mysale-crm'
+      - '-f'
+      - 'mysale-crm/Dockerfile'  # Update the path to your Dockerfile
+      - '.'  # Set the build context to the root directory
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/mysalecrm/mysalecrm']
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'sample-net-api'  # Update with your service name
+      - '--image=gcr.io/mysalecrm/mysalecrm'
+      - '--region=us-central1'
+      - '--platform=managed'
+      # Additional deployment options go here
+
+images:
+  - 'gcr.io/mysalecrm/mysalecrm'

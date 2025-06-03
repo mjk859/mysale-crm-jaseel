@@ -1,0 +1,206 @@
+﻿@model MySaleApp.Admin.UI.Models.Coupon
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Content-->
+<div class="page-content-tab">
+
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="float-end">
+                        <ol class="breadcrumb">
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Add Coupon</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+
+                    @*<div class="card-header">
+                    </div>*@
+
+                    <div class="card-body">
+                        <form class="my-4 needs-validation" asp-action="Create" asp-controller="Coupon" method="post" novalidate>
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <div class="mb-3 row">
+                                        <label for="name" class="col-sm-4 col-control-label text-end">Coupon Name</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text"  maxlength="20" asp-for="CouponName" autocomplete="off" placeholder="Enter Coupon Name" required>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please Enter Plan Name
+                                        </div>
+                                    </div>
+
+                                  
+
+                                    <div class="mb-3 row">
+                                        <label for="DiscountAmount" class="col-sm-4 col-control-label text-end">Discount Amount</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" pattern="^(\d{1,3}(,\d{3})*|(\d+))(\.\d{2})?$" maxlength="10" asp-for="DiscountAmount" autocomplete="off" required>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please Enter Valid Discount Amount
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                                <label class="form-check-label" for="IsDiscountPercentage">Is Discount Percentage</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="MinimumAmount" class="col-sm-4 col-control-label text-end">Minimum Amount</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" pattern="^(\d{1,3}(,\d{3})*|(\d+))(\.\d{2})?$" maxlength="10" asp-for="MinimumAmount" autocomplete="off" required>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please Enter Valid Minimum Amount
+                                        </div>
+                                    </div>
+                                   
+
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" checked asp-for="IsMultipleRedemptionAllowed">
+                                                <label class="form-check-label" for="IsMultipleRedemptionAllowed">Is MultipleRedemption Allowed</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsPlanOnlyCoupon">
+                                                <label class="form-check-label" for="IsPlanOnlyCoupon">Is PlanOnly Coupon</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsAdditionalLicenseOnlyCoupon">
+                                                <label class="form-check-label" for="IsAdditionalLicenseOnlyCoupon">Is AdditionalLicense Only Coupon</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsRenewalPlanOnly">
+                                                <label class="form-check-label" for="IsRenewalPlanOnly">Is Renewal Plan Only</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3 row">
+                                        <label for="CouponCode" class="col-sm-4 col-control-label text-end">Coupon Code</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" pattern="^(\d{1,3}(,\d{3})*|(\d+))(\.\d{2})?$" maxlength="10" asp-for="CouponCode" autocomplete="off" required>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please Enter Valid couponCode
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label for="DiscountPercentage" class="col-sm-4 col-control-label text-end">Discount Percentage</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="number" pattern="^(?:0|[1-9]\d?|100)(?:\.\d{1,2})?%?$" asp-for="DiscountPercentage" autocomplete="off" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label for="StartDate" class="col-sm-4 col-control-label text-end">Start Date</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="date" asp-for="StartDate">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label for="ExpirationDate" class="col-sm-4 col-control-label text-end">Expiration Date </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="date" asp-for="ExpirationDate">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" checked asp-for="IsNotExpire">
+                                                <label class="form-check-label" for="IsNotExpire">Is Not Expire</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="mb-3 row">
+                                        <label for="MaximumDiscountAmount" class="col-sm-4 col-control-label text-end">Maximum Discount Amount</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" pattern="^(\d{1,3}(,\d{3})*|(\d+))(\.\d{2})?$" maxlength="10" asp-for="MaximumDiscountAmount" autocomplete="off" required>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please Enter Valid Maximum Discount Amount
+                                        </div>
+                                    </div>
+                                   
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsActive" checked>
+                                                <label class="form-check-label" for="Active">Is Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+
+                            <!-- Save and Back Buttons Row -->
+                            <div class="mb-3 row">
+                                <div class="col-lg-12 text-center">
+                                    <button class="btn btn-de-primary btn-fixed-width" type="submit">Add</button>
+                                    <a class="btn btn-de-danger btn-fixed-width" asp-action="Index">Back</a>
+                                </div>
+                            </div><!-- End Save and Back Buttons Row -->
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,238 @@
+﻿@model MySaleApp.Admin.UI.ViewModel.PagedResultViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <!-- Heading and create button -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
+            <h2 class="mb-2 mb-md-0">Plans Overview</h2>
+            <a class="btn btn-primary" asp-action="Create">Create Plan</a>
+        </div>
+        <!-- Heading and create button Ends -->
+
+
+        <!-- Search bar -->
+        <form asp-action="Index" class="mb-3">
+            <div class="row justify-content-end">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="input-group">
+                        <input type="text" name="searchText" class="form-control" placeholder="Search by name" autocomplete="off" />
+                        <button class="btn btn-secondary" type="submit">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- Search bar Ends -->
+
+
+        <!-- Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Plan Name</th>
+                        <th>Monthly</th>
+                        <th>Annual</th>
+                        <th>Trial</th>
+                        <th>Trial Days</th>
+                        <th>Offer %</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Companies</th>
+                        <th>Users</th>
+                        <th>Flags</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Plans)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.MonthlyPrice @item.CurrencyCode</td>
+                            <td>@item.AnnualPrice @item.CurrencyCode</td>
+                            <td>
+                                @if (item.IsTrial)
+                                {
+                                    <span class="badge bg-info">Yes</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">No</span>
+                                }
+                            </td>
+                            <td>@item.TrialDays</td>
+                            <td>@item.OfferPercentage</td>
+                            <td>@item.OfferStart.ToShortDateString()</td>
+                            <td>@item.OfferEnd.ToShortDateString()</td>
+                            <td>@item.CompaniesAllowed</td>
+                            <td>@item.UsersAllowed</td>
+                            <td>
+                                @if (item.IsLifeTimePlan)
+                                {
+                                    <span class="badge bg-secondary" title="Lifetime Plan">LT</span>
+                                }
+                                @if (item.IsBilledMonthly)
+                                {
+                                    <span class="badge bg-secondary" title="Billed Monthly">BM</span>
+                                }
+                                @if (item.IsCustomPlan)
+                                {
+                                    <span class="badge bg-secondary" title="Custom Plan">CP</span>
+                                }
+                                @if (item.IsRecommended)
+                                {
+                                    <span class="badge bg-secondary" title="Recommended">RD</span>
+                                }
+                            </td>
+                            <td>
+                                @if (item.Active)
+                                {
+                                    <span class="badge bg-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Inactive</span>
+                                }
+                            <td>
+                                <div class="d-flex gap-1">
+                                    <a class="btn btn-sm btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.Id" data-name="@item.Name">
+                                        Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- Table Ends -->
+
+
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form asp-controller="Plan" asp-action="DeleteConfirmed" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete the plan <strong id="planName"></strong>?
+                            <input type="hidden" id="planIdInput" name="id" value="" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Delete Modal Ends -->
+
+
+        <!-- Pagination and Page size -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mt-3 gap-3">
+            @if (Model.TotalPages > 1)
+            {
+                <nav>
+                    <ul class="pagination pagination-sm mb-0">
+                        <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
+                            <a class="page-link" asp-action="Index"
+                               asp-route-pg="@(Model.PageIndex - 1)"
+                               asp-route-pageSize="@ViewData["PageSize"]">Prev</a>
+                        </li>
+
+                        @if (Model.TotalPages > 7)
+                        {
+                            <li class="page-item @(Model.PageIndex == 1 ? "active" : "")">
+                                <a class="page-link" asp-action="Index" asp-route-pg="1" asp-route-pageSize="@ViewData["PageSize"]">1</a>
+                            </li>
+
+                            @if (Model.PageIndex > 4)
+                            {
+                                <li class="page-item disabled"><span class="page-link">...</span></li>
+                            }
+
+                            @for (int i = Model.PageIndex - 2; i <= Model.PageIndex + 2; i++)
+                            {
+                                if (i > 1 && i < Model.TotalPages)
+                                {
+                                    <li class="page-item @(Model.PageIndex == i ? "active" : "")">
+                                        <a class="page-link" asp-action="Index" asp-route-pg="@i" asp-route-pageSize="@ViewData["PageSize"]">@i</a>
+                                    </li>
+                                }
+                            }
+
+                            @if (Model.PageIndex < Model.TotalPages - 3)
+                            {
+                                <li class="page-item disabled"><span class="page-link">...</span></li>
+                            }
+
+                            <li class="page-item @(Model.PageIndex == Model.TotalPages ? "active" : "")">
+                                <a class="page-link" asp-action="Index" asp-route-pg="@Model.TotalPages" asp-route-pageSize="@ViewData["PageSize"]">@Model.TotalPages</a>
+                            </li>
+                        }
+                        else
+                        {
+                            @for (int i = 1; i <= Model.TotalPages; i++)
+                            {
+                                <li class="page-item @(Model.PageIndex == i ? "active" : "")">
+                                    <a class="page-link" asp-action="Index" asp-route-pg="@i" asp-route-pageSize="@ViewData["PageSize"]">@i</a>
+                                </li>
+                            }
+                        }
+
+                        <li class="page-item @(Model.PageIndex == Model.TotalPages ? "disabled" : "")">
+                            <a class="page-link" asp-action="Index"
+                               asp-route-pg="@(Model.PageIndex + 1)"
+                               asp-route-pageSize="@ViewData["PageSize"]">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            }
+
+            <form method="get" asp-action="Index" class="d-flex align-items-center">
+                <label for="pageSize" class="me-2">Page Size:</label>
+                <select id="pageSize" name="pageSize"
+                        class="form-select form-select-sm"
+                        onchange="this.form.submit()"
+                        asp-items="@(ViewData["PageSizes"] as SelectList)">
+                </select>
+                <input type="hidden" name="pg" value="@Model.PageIndex" />
+            </form>
+        </div>
+        <!-- Pagination Ends and Page size -->
+
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var deleteModal = document.getElementById('deleteModal')
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget
+            var planId = button.getAttribute('data-id')
+            var planName = button.getAttribute('data-name')
+
+            var inputId = deleteModal.querySelector('#planIdInput')
+            var displayName = deleteModal.querySelector('#planName')
+
+            inputId.value = planId
+            displayName.textContent = planName
+        })
+    </script>
+}
+

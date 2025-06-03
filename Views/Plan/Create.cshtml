@@ -1,0 +1,145 @@
+﻿@model MySaleApp.Admin.UI.Models.Plan
+
+@{
+    ViewData["Title"] = "Add Plan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    <div class="container bg-white p-4 rounded shadow-sm">
+ 
+        <!-- Plan Details -->
+        <h5 class="mb-3">Plan Details</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Plan Name</label>
+                <input asp-for="Name" class="form-control" placeholder="Enter Plan Name" />
+            </div>
+            <div class="col-md-3">
+                <label>Display Order</label>
+                <input asp-for="DisplayOrder" type="number" class="form-control" />
+                <small class="form-text text-muted">Controls listing priority.</small>
+            </div>
+            <div class="col-md-3">
+                <label>Logo Path</label>
+                <input asp-for="LogoPath" class="form-control" placeholder="e.g. /images/plan.png" />
+            </div>
+        </div>
+
+        <!-- Pricing -->
+        <h5 class="mt-4 mb-3">Pricing</h5>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Monthly Price</label>
+                <input asp-for="MonthlyPrice" type="number" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label>Annual Price</label>
+                <input asp-for="AnnualPrice" type="number" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label>Life Time Price</label>
+                <input asp-for="LifeTimePrice" type="number" class="form-control" />
+            </div>
+        </div>
+
+        <!-- Plan Toggles -->
+        <div class="row mt-3">
+            <div class="col-md-2">
+                <div class="form-check form-switch">
+                    <input asp-for="IsBilledMonthly" class="form-check-input" />
+                    <label class="form-check-label">Billed Monthly</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-check form-switch">
+                    <input asp-for="IsCustomPlan" class="form-check-input" />
+                    <label class="form-check-label">Custom Plan</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-check form-switch">
+                    <input asp-for="IsLifeTimePlan" class="form-check-input" />
+                    <label class="form-check-label">Life Time Plan</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-check form-switch">
+                    <input asp-for="IsRecommended" class="form-check-input" />
+                    <label class="form-check-label">Recommended</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-check form-switch">
+                    <input asp-for="IsTrial" class="form-check-input" />
+                    <label class="form-check-label">Trial</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-check form-switch">
+                    <input asp-for="Active" class="form-check-input" />
+                    <label class="form-check-label">Active</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trial Days -->
+        <div class="row mt-3" id="trialDaysRow" style="display:none;">
+            <div class="col-md-3">
+                <label>Trial Days</label>
+                <input asp-for="TrialDays" type="number" class="form-control" />
+            </div>
+        </div>
+
+        <!-- Offer -->
+        <h5 class="mt-4 mb-3">Offer Settings</h5>
+        <div class="row">
+            <div class="col-md-3">
+                <label>Offer Percentage</label>
+                <input asp-for="OfferPercentage" type="number" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label>Offer Start Date</label>
+                <input asp-for="OfferStart" type="date" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label>Offer End Date</label>
+                <input asp-for="OfferEnd" type="date" class="form-control" />
+            </div>
+        </div>
+
+        <!-- Limits -->
+        <h5 class="mt-4 mb-3">Usage Limits</h5>
+        <div class="row">
+            <div class="col-md-3">
+                <label>Companies Allowed</label>
+                <input asp-for="CompaniesAllowed" type="number" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label>Users Allowed</label>
+                <input asp-for="UsersAllowed" type="number" class="form-control" />
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Add</button>
+            <a asp-page="/Plans/Index" class="btn btn-secondary">Back</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        // Show trial days only if 'IsTrial' is checked
+        const trialToggle = document.querySelector('[name="IsTrial"]');
+        const trialDaysRow = document.getElementById('trialDaysRow');
+
+        function toggleTrialDays() {
+            trialDaysRow.style.display = trialToggle.checked ? 'block' : 'none';
+        }
+
+        trialToggle.addEventListener('change', toggleTrialDays);
+        window.addEventListener('load', toggleTrialDays);
+    </script>
+}

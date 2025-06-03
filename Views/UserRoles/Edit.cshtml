@@ -1,0 +1,124 @@
+﻿@model MySaleApp.Admin.UI.Models.SystemUserRole
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Content-->
+<div class="page-content-tab">
+
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="float-end">
+                        <ol class="breadcrumb">
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Edit User Roles</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+
+                    @*<div class="card-header">
+                    </div>*@
+
+                    <div class="card-body">
+                        <form class="my-4 needs-validation" asp-action="Edit" asp-controller="UserRoles" method="post" novalidate>
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <input type="hidden" asp-for="Id" />
+
+                                    <div class="mb-2 row">
+                                        <label asp-for="UserRoleName" class="col-sm-3 col-control-label text-end">User Role Name</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" asp-for="UserRoleName" class="form-control" autocomplete="off" placeholder="Enter User Role Name" required />
+                                            <div class="invalid-feedback">
+                                                Please Enter User Role Name
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 row">
+                                        <label asp-for="SystemName" class="col-sm-3 col-control-label text-end">System Name</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" asp-for="SystemName" class="form-control" autocomplete="off" placeholder="Enter System Name" required />
+                                            <div class="invalid-feedback">
+                                                Please Enter System Name
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 row">
+                                        <label class="col-sm-3 col-control-label text-end"></label>
+                                        <div class="col-sm-9">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsSystemRole" checked>
+                                                <label class="form-check-label" for="IsSystemRole">Is System Role</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    @*<div class="mb-2 row">
+                                    <label asp-for="CustomerGuid" class="col-sm-3 col-control-label text-end">Customer Name</label>
+                                    <div class="col-sm-9">
+                                    <select asp-for="CustomerGuid" class="form-control" id="customerDropdown" required>
+                                    <option value="">Select a Customer Name</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                    Please Select a Customer Name
+                                    </div>
+                                    </div>
+                                    </div>*@
+
+                                    <div class="mb-3 row">
+                                    </div>
+
+                                    <!-- Save and Back Buttons Row -->
+                                    <div class="mb-4 row">
+                                        <div class="col-lg-12 text-center">
+                                            <button class="btn btn-de-primary btn-fixed-width" type="submit">Update</button>
+                                            <a class="btn btn-de-danger btn-fixed-width" asp-action="Index">Back</a>
+                                        </div>
+                                    </div><!-- End Save and Back Buttons Row -->
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<script src="~/assets/js/code.jquery.com_jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '@Url.Action("GetCustomers", "Customer")',
+            method: 'GET',
+            success: function (data) {
+                var customerDropdown = $('#customerDropdown');
+                $.each(data, function (index, customer) {
+                    var option = $('<option>').text(customer.customername).attr('value', customer.id);
+                    if (customer.id == '@Model.CustomerGuid') {
+                        option.attr('selected', 'selected');
+                    }
+                    customerDropdown.append(option);
+                });
+            }
+        });
+    });
+</script>*@

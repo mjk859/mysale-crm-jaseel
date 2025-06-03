@@ -1,0 +1,139 @@
+﻿@model IEnumerable<MySaleApp.Admin.UI.Models.Coupon>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Pager pager = new Pager();
+
+    // int pageNo = 0;
+
+    // if (ViewBag.Pager != null)
+    // {
+    //     pager = ViewBag.Pager;
+    //     pageNo = pager.CurrentPage;
+    // }
+}
+
+<!-- Page Content-->
+<div class="page-content-tab">
+
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="float-end">
+                    </div>
+                    <h4 class="page-title">Coupon List</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+
+                    <div class="card-header">
+                        <form asp-action="Index">
+
+                            <div class="row justify-content-end">
+
+                                <div class="col-sm-2 text-end">
+                                </div>
+                                <div class="col-sm-2 text-end">
+                                </div>
+                                <div class="col-sm-2 text-end">
+                                </div>
+                                <div class="col-sm-2 text-end">
+                                </div>
+
+                                 <div class="col-sm-2 text-end">
+                              @*   <a asp-action="Create" class="btn btn-primary">Create New</a> *@
+                                </div>
+                                <div class="col-sm-2 text-end">
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="searchText" class="form-control" placeholder="Search by name" autocomplete="off">
+                                        <button class="btn btn-secondary" type="submit"><i class="bi bi-arrow-clockwise"></i></button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center;">Coupon<br>Name</th>
+                                        <th style="text-align: center;">Coupon<br>Code</th>
+                                        <th style="text-align: center;">Discount<br>Amount</th>
+                                        <th style="text-align: center;">Discount<br>Percentage</th>
+                                        <th style="text-align: center;">Discount</th>
+                                        @* <th style="text-align: center;">Start<br>Date</th>
+                                        <th style="text-align: center;">Expiry<br>Date</th> *@
+                                        @* <th style="text-align: center;">Expire</th> *@
+                                        <th style="text-align: center;">Minimum<br>Amount</th>
+                                        <th style="text-align: center;">MaximumDiscount</th>
+                                        @* <th style="text-align: center;">MultipleRedemption</th>
+                                        <th style="text-align: center;">PlanOnly<br>Coupon</th> *@
+                                        <th style="text-align: center;">PlanId</th>
+                                       @*  <th style="text-align: center;">AdditionalLicense<br>Coupon</th>
+                                        <th style="text-align: center;">RenewalPlan<br>Only</th> *@
+                                        <th style="text-align: center;">Active</th>
+                                        @* <th style="text-align: center;">Status</th> *@
+                                        @* <th style="text-align: center;">Create<br>Date</th>
+                                        <th style="text-align: center;">Created<br>By</th>
+                                        <th style="text-align: center;">Modified<br>Date</th>
+                                        <th style="text-align: center;">Modified<br>By</th> *@
+                              
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.CouponName </td>
+                                            <td>@item.CouponCode </td>
+                                            <td>@item.DiscountAmount </td>
+                                            <td>@item.DiscountPercentage </td>
+                                            <td>@(item.IsDiscountPercentage? "Yes" : "No") </td>
+                                            @* <td>@item.StartDate.ToShortDateString() </td>
+                                            <td>@item.ExpirationDate.ToShortDateString() </td> *@
+                                            @* <td>@(item.IsNotExpire? "Yes" : "No") </td> *@
+                                            <td>@item.MinimumAmount </td>
+                                            <td>@item.MaximumDiscountAmount </td>
+                                            @* <td>@(item.IsMultipleRedemptionAllowed? "Yes" : "No") </td>
+                                            <td>@(item.IsPlanOnlyCoupon ? "Yes" : "No") </td> *@
+                                            <td>@item.PlanId </td>
+                                        @*     <td>@(item.IsAdditionalLicenseOnlyCoupon? "Yes" : "No") </td>
+                                            <td>@(item.IsRenewalPlanOnly? "Yes" : "No") </td> *@
+                                            <td>@(item.IsActive? "Yes" : "No") </td>
+                                            @* <td>@item.Status </td> *@
+                                            @* <td>@item.CreatedDate.ToShortDateString() </td>
+                                            <td>@item.CreatedBy </td>
+                                            <td>@item.ModifiedDate.ToShortDateString() </td>
+                                            <td>@item.ModifiedBy </td> *@
+
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Pagination-->
+                    @*  <partial name="_Pager" model="@pager"> *@
+                    <!-- End Pagination-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

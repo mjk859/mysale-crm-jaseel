@@ -1,0 +1,115 @@
+﻿@model MySaleApp.Admin.UI.Models.Plan
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="Edit" method="post" class="p-4">
+    <div class="mb-3 row">
+        <label for="Name" class="col-sm-2 col-form-label">Plan Name</label>
+        <div class="col-sm-10">
+            <input asp-for="Name" class="form-control" placeholder="Enter plan name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="MonthlyPrice" class="col-sm-2 col-form-label">Monthly Price</label>
+        <div class="col-sm-10">
+            <input asp-for="MonthlyPrice" class="form-control" placeholder="e.g. 99.99"
+                   pattern="^\d{1,9}(\.\d{1,2})?$" maxlength="10" />
+            <span asp-validation-for="MonthlyPrice" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="AnnualPrice" class="col-sm-2 col-form-label">Annual Price</label>
+        <div class="col-sm-10">
+            <input asp-for="AnnualPrice" class="form-control" placeholder="e.g. 999.99"
+                   pattern="^\d{1,9}(\.\d{1,2})?$" maxlength="10" />
+            <span asp-validation-for="AnnualPrice" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="LifeTimePrice" class="col-sm-2 col-form-label">Lifetime Price</label>
+        <div class="col-sm-10">
+            <input asp-for="LifeTimePrice" class="form-control" placeholder="e.g. 4999.99"
+                   pattern="^\d{1,9}(\.\d{1,2})?$" maxlength="10" />
+            <span asp-validation-for="LifeTimePrice" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="OfferPercentage" class="col-sm-2 col-form-label">Offer (%)</label>
+        <div class="col-sm-10">
+            <input asp-for="OfferPercentage" class="form-control" type="number" min="0" max="100" step="0.01" />
+            <span asp-validation-for="OfferPercentage" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="TrialDays" class="col-sm-2 col-form-label">Trial Days</label>
+        <div class="col-sm-10">
+            <input asp-for="TrialDays" class="form-control" pattern="^\d{1,2}$" maxlength="2" />
+            <span asp-validation-for="TrialDays" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="CompaniesAllowed" class="col-sm-2 col-form-label">Companies Allowed</label>
+        <div class="col-sm-10">
+            <input asp-for="CompaniesAllowed" class="form-control" pattern="^\d{1,2}$" maxlength="2" />
+            <span asp-validation-for="CompaniesAllowed" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="UsersAllowed" class="col-sm-2 col-form-label">Users Allowed</label>
+        <div class="col-sm-10">
+            <input asp-for="UsersAllowed" class="form-control" pattern="^\d{1,2}$" maxlength="2" />
+            <span asp-validation-for="UsersAllowed" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="DisplayOrder" class="col-sm-2 col-form-label">Display Order</label>
+        <div class="col-sm-10">
+            <input asp-for="DisplayOrder" class="form-control" pattern="^\d{1,2}$" maxlength="2" />
+            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-check mb-2">
+        <input class="form-check-input" type="checkbox" asp-for="IsBilledMonthly" />
+        <label class="form-check-label" for="IsBilledMonthly">Billed Monthly</label>
+    </div>
+
+    <div class="form-check mb-2">
+        <input class="form-check-input" type="checkbox" asp-for="IsCustomPlan" />
+        <label class="form-check-label" for="IsCustomPlan">Custom Plan</label>
+    </div>
+
+    <div class="form-check mb-2">
+        <input class="form-check-input" type="checkbox" asp-for="IsLifeTimePlan" />
+        <label class="form-check-label" for="IsLifeTimePlan">Lifetime Plan</label>
+    </div>
+
+    <div class="form-check mb-2">
+        <input class="form-check-input" type="checkbox" asp-for="IsRecommended" />
+        <label class="form-check-label" for="IsRecommended">Recommended</label>
+    </div>
+
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" asp-for="IsTrial" />
+        <label class="form-check-label" for="IsTrial">Is Trial</label>
+    </div>
+
+    <div class="mb-3 row">
+        <div class="col-sm-10 offset-sm-2">
+            <button type="submit" class="btn btn-success">Save</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,195 @@
+﻿@model MySaleApp.Admin.UI.Models.SystemUser
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Content-->
+<div class="page-content-tab">
+
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="float-end">
+                        <ol class="breadcrumb">
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Edit System User</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+
+                    @*<div class="card-header">
+                    </div>*@
+
+                    <div class="card-body">
+                        <form class="my-4 needs-validation" asp-action="Edit" asp-controller="SystemUser" method="post" novalidate>
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <input type="hidden" asp-for="Id" />
+
+                                    <div class="mb-2 row">
+                                        <label asp-for="UserName" class="col-sm-3 col-control-label text-end">User Name</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" pattern="[A-Za-z\s]+" class="form-control" asp-for="UserName" autocomplete="off" placeholder="Enter User Name" required>
+                                            <div class="invalid-feedback">
+                                                Please Enter Valid User Name
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 row">
+                                        <label asp-for="UserRoleGuid" class="col-sm-3 col-control-label text-end">User Role</label>
+                                        <div class="col-sm-9">
+                                            <select asp-for="UserRoleGuid" class="form-control" id="userRoleDropwown" required>
+                                                <option value="">Select User Role</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 row">
+                                        <label asp-for="Email" class="col-sm-3 col-control-label text-end">Email Address</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="Email" class="form-control" autocomplete="off" placeholder="Enter Email Address" required />
+                                            <div class="invalid-feedback">
+                                                Please Enter Valid Email Address
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @* <div class="mb-2 row">
+                                    <label asp-for="Password" class="col-sm-3 col-control-label text-end">Password</label>
+                                    <div class="col-sm-9">
+                                    <input asp-for="Password" class="form-control" autocomplete="off" placeholder="Enter Password" required />
+                                    <div class="invalid-feedback">
+                                    Please Enter Password
+                                    </div>
+                                    </div>
+                                    </div>*@
+
+                                    @*<div class="mb-2 row">
+                                    <label asp-for="PasswordSalt" class="col-sm-3 col-control-label text-end">Password Salt</label>
+                                    <div class="col-sm-9">
+                                    <input asp-for="PasswordSalt" class="form-control" autocomplete="off" placeholder="Enter Password Salt" required />
+                                    <div class="invalid-feedback">
+                                    Please Enter Password Salt
+                                    </div>
+                                    </div>
+                                    </div>*@
+
+                                    <div class="mb-2 row">
+                                        <label class="col-sm-3 col-control-label text-end"></label>
+                                        <div class="col-sm-9">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsActive" checked>
+                                                <label class="form-check-label" for="isActive">Is Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 row">
+                                        <label class="col-sm-3 col-control-label text-end"></label>
+                                        <div class="col-sm-9">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsBlocked">
+                                                <label class="form-check-label" for="isBlocked">Is Blocked</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 row">
+                                        <label class="col-sm-3 col-control-label text-end"></label>
+                                        <div class="col-sm-9">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsDeleted">
+                                                <label class="form-check-label" for="isDeleted">Is Deleted</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 row">
+                                        <label class="col-sm-3 col-control-label text-end"></label>
+                                        <div class="col-sm-9">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsSystemAccount">
+                                                <label class="form-check-label" for="IsSystemAccount">Is System Account</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 row">
+                                        <label class="col-sm-3 col-control-label text-end" asp-for="LastActivityDateUtc">Last Activity Date</label>
+                                        <div class="col-sm-9">
+                                            <input type="date" class="form-control" asp-for="LastActivityDateUtc">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 row">
+                                        <label asp-for="LastIpAddress" class="col-sm-3 col-control-label text-end">Last IP Address</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="LastIpAddress" class="form-control" autocomplete="off" placeholder="Enter Last IP Address" required />
+                                            <div class="invalid-feedback">
+                                                Please Enter Last IP Address
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 row">
+                                        <label class="col-sm-3 col-control-label text-end" asp-for="LastLoginDateUtc">Last Login Date</label>
+                                        <div class="col-sm-9">
+                                            <input type="date" class="form-control" asp-for="LastLoginDateUtc">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                    </div>
+
+                                    <!-- Save and Back Buttons Row -->
+                                    <div class="mb-4 row">
+                                        <div class="col-lg-12 text-center">
+                                            <button class="btn btn-de-primary btn-fixed-width" type="submit">Update</button>
+                                            <a class="btn btn-de-danger btn-fixed-width" asp-action="Index">Back</a>
+                                        </div>
+                                    </div><!-- End Save and Back Buttons Row -->
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/code.jquery.com_jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '@Url.Action("GetUserRoles", "UserRoles")',
+            method: 'GET',
+            success: function (data) {
+                console.log('Received data:', data);
+                var userRoleDropwown = $('#userRoleDropwown');
+                $.each(data, function (index, userrole) {
+                    var option = $('<option>').text(userrole.userRoleName).attr('value', userrole.userRoleGuid);
+                    if (userrole.userRoleGuid == '@Model.UserRoleGuid') {
+                        option.attr('selected', 'selected');
+                    }
+                    userRoleDropwown.append(option);
+                });
+            }
+        });
+    });
+</script>

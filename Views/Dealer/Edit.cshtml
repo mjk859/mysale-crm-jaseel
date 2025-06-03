@@ -1,0 +1,56 @@
+﻿@model MySaleApp.Admin.UI.Models.Dealer
+
+@{
+    ViewData["Title"] = "Create Dealer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4>Edit Dealer</h4>
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="DealerCode" class="form-label">Dealer Code</label>
+                <input asp-for="DealerCode" class="form-control" />
+                <span asp-validation-for="DealerCode" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ReferralCode" class="form-label">Referral Code</label>
+                <input asp-for="ReferralCode" class="form-control" />
+                <span asp-validation-for="ReferralCode" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <div class="form-check form-switch form-switch-success">
+                    <input class="form-check-input" type="checkbox" asp-for="IsActive" checked>
+                    <label class="form-check-label" for="isActive">Is Active</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="ModifiedDate">Modified Date</label>
+                <input type="date" class="form-control" asp-for="ModifiedDate" readonly/>
+                <span asp-validation-for="ModifiedDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="ModifiedBy">Modified By</label>
+                <input asp-for="ModifiedBy" class="form-control" readonly/>
+                <span asp-validation-for="ModifiedBy" class="text-danger"></span>
+            </div>
+            <button class="btn btn-primary btn-fixed-width" type="submit">Update</button>
+            <a class="btn btn-outline-secondary btn-fixed-width" asp-action="Index">Back</a>
+        </form>
+    </div>
+</div>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @ViewBag.ErrorMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+

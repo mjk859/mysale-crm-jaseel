@@ -1,0 +1,91 @@
+﻿@model MySaleApp.Admin.UI.Models.SystemUser
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Content-->
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between mb-3">
+            <h4>Add System User</h4>
+            
+
+        </div>
+
+        <div>
+            <form class="my-4 needs-validation" asp-action="Create" asp-controller="SystemUser" method="post" novalidate>
+                <div class="mb-3">
+                    <label asp-for="UserName" class="form-label">User Name</label>
+                    <input type="text" pattern="[A-Za-z\s]+" class="form-control" asp-for="UserName" autocomplete="off" placeholder="Enter User Name" required>
+                    <div class="invalid-feedback">Please Enter Valid User Name</div>
+                </div>
+                <div class="mb-3 ">
+                    <label asp-for="UserRoleGuid" class="form-label"></label>
+                    <select asp-for="UserRoleGuid" class="form-select" asp-items="ViewBag.UserRoles">
+                        <option value="">-- Select a User --</option>
+                    </select>
+                    <span asp-validation-for="UserRoleGuid" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email Address</label>
+                    <input asp-for="Email" class="form-control" autocomplete="off" placeholder="Enter Email Address" required />
+                    <div class="invalid-feedback">Please Enter Valid Email Address</div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <input asp-for="Password" class="form-control" autocomplete="off" placeholder="Enter Password" required />
+                    <div class="invalid-feedback">Please Enter Password</div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="PasswordSalt" class="form-label">Password Salt</label>
+                    <input asp-for="PasswordSalt" class="form-control" autocomplete="off" placeholder="Enter Password Salt" required />
+                    <div class="invalid-feedback">Please Enter Password Salt</div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check form-switch form-switch-success">
+                        <input class="form-check-input" type="checkbox" asp-for="IsActive" checked>
+                        <label class="form-check-label" for="isActive">Is Active</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check form-switch form-switch-success">
+                        <input class="form-check-input" type="checkbox" asp-for="IsBlocked">
+                        <label class="form-check-label" for="isBlocked">Is Blocked</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check form-switch form-switch-success">
+                        <input class="form-check-input" type="checkbox" asp-for="IsDeleted">
+                        <label class="form-check-label" for="isDeleted">Is Deleted</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check form-switch form-switch-success">
+                        <input class="form-check-input" type="checkbox" asp-for="IsSystemAccount">
+                        <label class="form-check-label" for="IsSystemAccount">Is System Account</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="LastActivityDateUtc">Last Activity Date</label>
+                    <input type="date" class="form-control" asp-for="LastActivityDateUtc">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="LastIpAddress" class="form-label">Last IP Address</label>
+                    <input asp-for="LastIpAddress" class="form-control" autocomplete="off" placeholder="Enter Last IP Address" required />
+                    <div class="invalid-feedback">Please Enter Last IP Address</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="LastLoginDateUtc">Last Login Date</label>
+                    <input type="date" class="form-control" asp-for="LastLoginDateUtc">
+                </div>
+                <button class="btn btn-primary btn-fixed-width" type="submit">Add</button>
+                <a class="btn btn-outline-secondary btn-fixed-width" asp-action="Index">Back</a>
+                            
+                <input type="hidden" asp-for="CreatedBy" value="300196" />
+                <input type="hidden" asp-for="ModifiedBy" value="300196" />
+            </form>
+        </div>
+    </div>
+</div>

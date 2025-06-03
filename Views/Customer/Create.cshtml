@@ -1,0 +1,270 @@
+﻿@model MySaleApp.Admin.UI.Models.Customer
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Content-->
+<div class="page-content-tab">
+
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="float-end">
+                        <ol class="breadcrumb">
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Add Customer</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <form class="my-4 needs-validation" asp-action="Create" asp-controller="Customer" method="post" novalidate>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="CustomerName" class="col-sm-4 col-control-label text-end">Customer Name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" pattern="[A-Za-z\s]+" asp-for="CustomerName" class="form-control" autocomplete="off" placeholder="Enter Customer Name" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="CountryCode" class="col-sm-4 col-control-label text-end">Country Code</label>
+                                        <div class="col-sm-8">
+                                            <input asp-for="CountryCode" class="form-control" autocomplete="off" placeholder="Enter Country Code" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="CountryDialCode" class="col-sm-4 col-control-label text-end">Country Dial Code</label>
+                                        <div class="col-sm-8">
+                                            <input asp-for="CountryDialCode" maxlength="3" pattern="\d{0,3}" class="form-control" autocomplete="off" placeholder="Enter Country Dail Code" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="MobileNo" class="col-sm-4 col-control-label text-end">Mobile Number</label>
+                                        <div class="col-sm-8">
+                                            <input asp-for="MobileNo" maxlength="10" pattern="[0-9]{10}" class="form-control" autocomplete="off" placeholder="Enter Mobile Number" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="MobileVerificationOtp" class="col-sm-4 col-control-label text-end">Mobile Number Verification Code</label>
+                                        <div class="col-sm-8">
+                                            <input asp-for="MobileVerificationOtp" maxlength="6" pattern="[0-9]{6}" class="form-control" autocomplete="off" placeholder="Enter Mobile Number Verification Code" />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsMobileVerified">
+                                                <label class="form-check-label" for="isMobileVerified">Is Mobile Verified</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="Email" class="col-sm-4 col-control-label text-end">Email Address</label>
+                                        <div class="col-sm-8">
+                                            <input asp-for="Email" class="form-control" autocomplete="off" required placeholder="Enter Email Address" />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="EmailVerificationOtp" class="col-sm-4 col-control-label text-end">Email Verification Code</label>
+                                        <div class="col-sm-8">
+                                            <input asp-for="EmailVerificationOtp" maxlength="6" pattern="[0-9]{6}" class="form-control" autocomplete="off" placeholder="Enter Email Verification Code" />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsEmailVerified">
+                                                <label class="form-check-label" for="isEmailVerified">Is Email Verified</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="DbName" class="col-sm-4 col-control-label text-end">Database Name</label>
+                                        <div class="col-sm-8">
+                                            <input asp-for="DbName" class="form-control" autocomplete="off" placeholder="Enter Database Name" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="PlanId" class="col-sm-4 col-control-label text-end">Plan</label>
+                                        <div class="col-sm-8">
+                                            <select asp-for="PlanId" class="form-control" id="planDropdown" required>
+                                                <option value="">Select a Plan</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsDbCreated">
+                                                <label class="form-check-label" for="isDbCreated">Is Db Created</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsDbProcessCompleted">
+                                                <label class="form-check-label" for="isDbProcessCompleted">Is Db Process Completed</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsActive" checked>
+                                                <label class="form-check-label" for="isActive">Is Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsBlocked">
+                                                <label class="form-check-label" for="isBlocked">Is Blocked</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-4 col-control-label text-end"></label>
+                                        <div class="col-sm-8">
+                                            <div class="form-check form-switch form-switch-success">
+                                                <input class="form-check-input" type="checkbox" asp-for="IsDeleted">
+                                                <label class="form-check-label" for="isDeleted">Is Deleted</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="ReferralCode" class="col-sm-4 col-control-label text-end">Refferal Code</label>
+                                        <div class="col-sm-8">
+                                            <input asp-for="ReferralCode" class="form-control" autocomplete="off" placeholder="Enter Refferal Code" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label asp-for="ReferredBy" class="col-sm-4 col-control-label text-end">Reffered By</label>
+                                        <div class="col-sm-8">
+                                            <input asp-for="ReferredBy" class="form-control" autocomplete="off" placeholder="Enter Reffered By" required />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Save and Back Buttons Row -->
+                            <div class="mb-3 row">
+                                <div class="col-lg-12 text-center">
+                                    <button class="btn btn-de-primary btn-fixed-width" type="submit">Add</button>
+                                    <a class="btn btn-de-danger btn-fixed-width" asp-action="Index">Back</a>
+                                </div>
+                            </div><!-- End Save and Back Buttons Row -->
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/assets/js/code.jquery.com_jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '@Url.Action("GetPlans", "Plan")',
+            success: function (data) {
+                var planDropdown = $('#planDropdown');
+                $.each(data, function (index, plan) {
+                    planDropdown.append($('<option>').text(plan.name).attr('value', plan.id));
+                });
+            }
+        });
+    });
+</script>
+
+@*<script>
+    setTimeout(function () {
+        document.getElementById("successAlert").style.display = "none";
+    }, 3000); // Adjust the time interval 3 SEC - 3000 MILLISEC
+</script>*@
+
+
+@*<script>
+    const customerNameInput = document.getElementById('customerNameInput');
+    const customerNameValidation = document.getElementById('customerNameValidation');
+
+    customerNameInput.addEventListener('input', function () {
+        const inputValue = customerNameInput.value;
+        const hasSpecialCharsOrNumbers = /[!#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(inputValue) || /\d/.test(inputValue);
+
+        if (hasSpecialCharsOrNumbers) {
+            customerNameInput.classList.remove('is-valid');
+            customerNameInput.classList.add('is-invalid');
+            customerNameValidation.style.display = 'block';
+        } else {
+            customerNameInput.classList.remove('is-invalid');
+            customerNameInput.classList.add('is-valid');
+            customerNameValidation.style.display = 'none';
+        }
+    });
+</script>*@
+
+
+@*@foreach (var fieldError in ViewBag.FieldErrors)
+{
+    var fieldName = fieldError.Key;
+    var errorMessage = fieldError.Value;
+
+    <div class="form-group mb-2">
+        <label asp-for="@Html.NameFor(model => model[fieldName])" class="control-label">@Html.DisplayNameFor(model => model[fieldName])</label>
+        <input asp-for="@Html.NameFor(model => model[fieldName])" class="form-control" autocomplete="off" required />
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="invalid-feedback">
+                @errorMessage
+            </div>
+        }
+    </div>
+}
+*@
