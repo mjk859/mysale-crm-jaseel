@@ -1,4 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>6d7bbb29-2758-45c5-bdd6-3f2517b5e708</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..\..</DockerfileContext>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Update="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<Project Sdk="Microsoft.NET.Sdk.Web">
 	  <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
 		  <Nullable>enable</Nullable>
@@ -68,6 +82,72 @@
 
 	<ItemGroup>
 	  <UpToDateCheckInput Remove="Views\Coupon\Create.cshtml" />
+	</ItemGroup>
+
+
+</Project>
+
+	<ItemGroup>
+		<Compile Remove="Data\**" />
+		<Content Remove="Data\**" />
+		<EmbeddedResource Remove="Data\**" />
+		<None Remove="Data\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Remove="Views\Shared\_Layout.cshtml" />
+		<Content Remove="wwwroot\assets\js\pages\bootstrap.min.js" />
+		<None Update="app.yaml">
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="wwwroot\images\" />
+		<Folder Include="wwwroot\lib\bootstrap\" />
+		<Folder Include="wwwroot\lib\bootstrap\dist\js\" />
+		<Folder Include="wwwroot\lib\jquery-validation-unobtrusive\" />
+		<Folder Include="wwwroot\lib\jquery-validation\" />
+		<Folder Include="wwwroot\lib\jquery-validation\dist\" />
+		<Folder Include="wwwroot\lib\jquery\" />
+		<Folder Include="wwwroot\lib\jquery\dist\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ClosedXML" Version="0.102.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.7" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
+		<PackageReference Include="X.PagedList.Mvc.Core" Version="10.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Views\Shared\_Layout.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<_ContentIncludedByDefault Remove="Views\Coupon\Create.cshtml" />
+		<_ContentIncludedByDefault Remove="wwwroot\assets\js\pages\bootstrap.min.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="wwwroot\assets\js\pages\bootstrap.min.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<UpToDateCheckInput Remove="Views\Coupon\Create.cshtml" />
 	</ItemGroup>
 
 
